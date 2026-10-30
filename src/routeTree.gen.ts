@@ -23,11 +23,13 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as QualityRouteImport } from './routes/quality'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as UploadsNameRouteImport } from './routes/uploads.$name'
 import { Route as ApiPublicChatRouteImport } from './routes/api/public/chat'
 
 const IndexRoute = IndexRouteImport.update({
@@ -99,6 +101,11 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -124,6 +131,11 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ServicesRoute,
 } as any)
+const UploadsNameRoute = UploadsNameRouteImport.update({
+  id: '/uploads/$name',
+  path: '/uploads/$name',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicChatRoute = ApiPublicChatRouteImport.update({
   id: '/api/public/chat',
   path: '/api/public/chat',
@@ -144,10 +156,12 @@ export interface FileRoutesByFullPath {
   '/quality': typeof QualityRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/uploads/$name': typeof UploadsNameRoute
   '/products/': typeof ProductsIndexRoute
   '/api/public/chat': typeof ApiPublicChatRoute
 }
@@ -164,10 +178,12 @@ export interface FileRoutesByTo {
   '/quality': typeof QualityRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/uploads/$name': typeof UploadsNameRoute
   '/products': typeof ProductsIndexRoute
   '/api/public/chat': typeof ApiPublicChatRoute
 }
@@ -187,10 +203,12 @@ export interface FileRoutesById {
   '/quality': typeof QualityRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/uploads/$name': typeof UploadsNameRoute
   '/products/': typeof ProductsIndexRoute
   '/api/public/chat': typeof ApiPublicChatRoute
 }
@@ -210,10 +228,12 @@ export interface FileRouteTypes {
     | '/quality'
     | '/quote'
     | '/services'
+    | '/sitemap.xml'
     | '/terms'
     | '/admin'
     | '/products/$slug'
     | '/services/$slug'
+    | '/uploads/$name'
     | '/products/'
     | '/api/public/chat'
   fileRoutesByTo: FileRoutesByTo
@@ -230,10 +250,12 @@ export interface FileRouteTypes {
     | '/quality'
     | '/quote'
     | '/services'
+    | '/sitemap.xml'
     | '/terms'
     | '/admin'
     | '/products/$slug'
     | '/services/$slug'
+    | '/uploads/$name'
     | '/products'
     | '/api/public/chat'
   id:
@@ -252,10 +274,12 @@ export interface FileRouteTypes {
     | '/quality'
     | '/quote'
     | '/services'
+    | '/sitemap.xml'
     | '/terms'
     | '/_authenticated/admin'
     | '/products/$slug'
     | '/services/$slug'
+    | '/uploads/$name'
     | '/products/'
     | '/api/public/chat'
   fileRoutesById: FileRoutesById
@@ -275,7 +299,9 @@ export interface RootRouteChildren {
   QualityRoute: typeof QualityRoute
   QuoteRoute: typeof QuoteRoute
   ServicesRoute: typeof ServicesRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  UploadsNameRoute: typeof UploadsNameRoute
   ApiPublicChatRoute: typeof ApiPublicChatRoute
 }
 
@@ -379,6 +405,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -413,6 +446,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/services/$slug'
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof ServicesRoute
+    }
+    '/uploads/$name': {
+      id: '/uploads/$name'
+      path: '/uploads/$name'
+      fullPath: '/uploads/$name'
+      preLoaderRoute: typeof UploadsNameRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/chat': {
       id: '/api/public/chat'
@@ -476,7 +516,9 @@ const rootRouteChildren: RootRouteChildren = {
   QualityRoute: QualityRoute,
   QuoteRoute: QuoteRoute,
   ServicesRoute: ServicesRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  UploadsNameRoute: UploadsNameRoute,
   ApiPublicChatRoute: ApiPublicChatRoute,
 }
 export const routeTree = rootRouteImport
